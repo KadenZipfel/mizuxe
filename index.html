@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <nav class="navbar navbar-expand-md navbar-light fixed-top py-4">
+<body id="home" data-spy="scroll" data-target="#main-nav">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
     <div class="container">
       <a href="#home" class="navbar-brand">
         <img src="img/mlogo.png" width="50" height="50" alt="">
@@ -422,6 +422,22 @@
   <script>
     // Get current year for copyright
     $('#year').text(new Date().getFullYear());
+
+    // Init Scrollspy
+    $('body').scrollspy({target: '#main-nav'});
+
+    // Smooth Scrolling
+    $('#main-nav a').on('click', function(e) {
+      if(this.hash !== "") {
+        e.preventDefault();
+        const hash = this.hash;
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 800, function() {
+          window.location.hash = hash;
+        });
+      }
+    });
   </script>
 </body>
 </html>
